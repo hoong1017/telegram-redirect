@@ -70,7 +70,7 @@ def help_page():
 
 body{
     font-family:'Inter',sans-serif;
-    max-width:900px;
+    max-width:700px;
     margin:auto;
     padding:30px;
     background:linear-gradient(180deg,#0f0f11,#17171a);
@@ -80,7 +80,7 @@ body{
 h1{
     text-align:center;
     margin-bottom:5px;
-    font-size:clamp(28px,5vw,42px);
+    font-size:clamp(24px,4vw,34px);
 }
 
 .subtitle{
@@ -91,7 +91,7 @@ h1{
 
 .card{
     background:linear-gradient(180deg,#1b1b1f,#131316);
-    padding:28px;
+    padding:20px;
     border-radius:18px;
     margin-bottom:20px;
     border:1px solid #2b2b30;
@@ -135,13 +135,16 @@ h1{
 
 .popup{
 
-    width:90%;
+    background:#1b1b1f;
+
+    width:92%;
 
     max-width:420px;
+    padding:20px;
 
     border-radius:24px;
 
-    padding:20px;
+    
 
 }
 
@@ -159,7 +162,7 @@ h1{
 }
 
 .popup h2{
-    font-size:28px;
+    font-size:22px;
     margin-bottom:10px;
 }
 
