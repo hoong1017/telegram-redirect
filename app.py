@@ -1,6 +1,6 @@
 from flask import Flask, redirect, request
 import sqlite3
-from datetime import datetime
+from datetime import datetime, timedelta
 
 app = Flask(__name__)
 
@@ -46,7 +46,7 @@ def add_click(ip):
         """,
         (
             ip,
-            datetime.now().strftime(
+            (datetime.utcnow() + timedelta(hours=8)).strftime(
                 "%Y-%m-%d %H:%M:%S"
             )
         )
