@@ -135,15 +135,13 @@ h1{
 
 .popup{
 
-    background:#1b1b1f;
+    width:90%;
 
-    width:92%;
-
-    max-width:500px;
+    max-width:420px;
 
     border-radius:24px;
 
-    padding:24px;
+    padding:20px;
 
 }
 
