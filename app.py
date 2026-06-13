@@ -80,7 +80,7 @@ body{
 h1{
     text-align:center;
     margin-bottom:5px;
-    font-size:clamp(24px,4vw,34px);
+    font-size:clamp(20px,4vw,30px);
 }
 
 .subtitle{
@@ -91,7 +91,7 @@ h1{
 
 .card{
     background:linear-gradient(180deg,#1b1b1f,#131316);
-    padding:20px;
+    padding:16px;
     border-radius:18px;
     margin-bottom:20px;
     border:1px solid #2b2b30;
@@ -100,12 +100,15 @@ h1{
 
 .card h2{
     margin-top:0;
+    font-size:20px;
 }
 
 .btn{
+    box-sizing:border-box;
     display:inline-block;
     margin:5px;
-    padding:12px 20px;
+    padding:8px 14px;
+    font-size:13px;
     border-radius:12px;
     text-decoration:none;
     color:white;
@@ -137,13 +140,13 @@ h1{
 
     background:#1b1b1f;
 
-    width:92%;
+    width:78%;
 
-    max-width:420px;
-    padding:20px;
+    max-width:320px;
 
-    border-radius:24px;
+    padding:16px;
 
+    border-radius:18px;
     
 
 }
@@ -156,32 +159,43 @@ h1{
 }
 
 .popup img{
-    width:100%;
+   width:85%;
 
-    border-radius:18px;
+    display:block;
+
+    margin:auto;
+
+    border-radius:12px;
 }
 
 .popup h2{
-    font-size:22px;
+    font-size:18px;
     margin-bottom:10px;
 }
 
 .popup-desc{
+font-size:13px;
     color:#9ca3af;
     line-height:1.6;
 }
 
 .benefits{
     color:#d1d5db;
-    line-height:2;
+      font-size:14px;
+    line-height:1.7;
     margin-bottom:20px;
 }
-
+.card p{
+    font-size:13px;
+    color:#8d8d8d;
+    line-height:1.5;
+}
 /* 手机优化 */
 
 @media (max-width:768px){
 
     .btn{
+    box-sizing:border-box;
         display:block;
         width:100%;
         text-align:center;
@@ -211,7 +225,7 @@ window.onload=function(){
 <body>
 
 <h1>Netflix Support Center</h1>
-<div class="subtitle">Premium Customer Portal</div>
+<div class="subtitle">Shop Sinchan Customer Portal</div>
 
 
 <div class="card">
@@ -230,9 +244,10 @@ target="_blank"
 <img
 src="/static/tutorial.png"
 style="
-width:100%;
+width:90%;
+display:block;
+margin:auto;
 border-radius:12px;
-margin-top:15px;
 cursor:pointer;
 ">
 
