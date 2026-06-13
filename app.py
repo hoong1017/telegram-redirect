@@ -107,8 +107,8 @@ h1{
     box-sizing:border-box;
     display:inline-block;
     margin:5px;
-    padding:8px 14px;
-    font-size:13px;
+    padding:8px 12px;
+    font-size:12px;
     border-radius:12px;
     text-decoration:none;
     color:white;
@@ -140,14 +140,13 @@ h1{
 
     background:#1b1b1f;
 
-    width:78%;
+     width:70%;
 
-    max-width:320px;
+    max-width:280px;
 
-    padding:16px;
+    padding:14px;
 
-    border-radius:18px;
-    
+    border-radius:16px;
 
 }
 
@@ -159,7 +158,8 @@ h1{
 }
 
 .popup img{
-   width:85%;
+
+    width:75%;
 
     display:block;
 
@@ -169,20 +169,20 @@ h1{
 }
 
 .popup h2{
-    font-size:18px;
+    font-size:14px;
     margin-bottom:10px;
 }
 
 .popup-desc{
-font-size:13px;
+font-size:12px;
     color:#9ca3af;
     line-height:1.6;
 }
 
 .benefits{
     color:#d1d5db;
-      font-size:14px;
-    line-height:1.7;
+      font-size:12px;
+    line-height:1.5;
     margin-bottom:20px;
 }
 .card p{
