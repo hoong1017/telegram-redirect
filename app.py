@@ -1,161 +1,355 @@
-from flask import Flask, redirect, request
-import sqlite3
-from datetime import datetime, timedelta
-
+from flask import Flask, redirect
+from flask import request
 app = Flask(__name__)
 
-DB = "stats.db"
-STATS_PASSWORD = "sinchan123"
+CLICK_FILE = "clicks.txt"
 
+def get_clicks():
 
-def init_db():
+    try:
 
-    conn = sqlite3.connect(DB)
+        with open(
+            CLICK_FILE,
+            "r"
+        ) as f:
 
-    c = conn.cursor()
-
-    c.execute("""
-        CREATE TABLE IF NOT EXISTS clicks (
-            id INTEGER PRIMARY KEY AUTOINCREMENT,
-            ip TEXT,
-            created_at TEXT
-        )
-    """)
-
-    conn.commit()
-    conn.close()
-
-
-# Render / Gunicorn 启动时立即创建表
-init_db()
-
-
-def add_click(ip):
-
-    conn = sqlite3.connect(DB)
-
-    c = conn.cursor()
-
-    c.execute(
-        """
-        INSERT INTO clicks (
-            ip,
-            created_at
-        )
-        VALUES (?, ?)
-        """,
-        (
-            ip,
-            (datetime.utcnow() + timedelta(hours=8)).strftime(
-                "%Y-%m-%d %H:%M:%S"
+            return int(
+                f.read()
             )
-        )
-    )
 
-    conn.commit()
-    conn.close()
+    except:
+
+        return 0
+
+
+def save_clicks(clicks):
+
+    with open(
+        CLICK_FILE,
+        "w"
+    ) as f:
+
+        f.write(
+            str(clicks)
+        )
 
 
 @app.route("/")
 def home():
 
-    ip = request.headers.get(
-        "X-Forwarded-For",
-        request.remote_addr
-    )
+    clicks = get_clicks()
 
-    add_click(ip)
+    clicks += 1
 
-    return redirect(
-        "https://t.me/sinchan_shop",
-        code=302
-    )
-
-
-@app.route("/join")
-def join():
-
-    ip = request.headers.get(
-        "X-Forwarded-For",
-        request.remote_addr
-    )
-
-    add_click(ip)
+    save_clicks(clicks)
 
     return redirect(
         "https://t.me/sinchan_shop",
         code=302
     )
+@app.route("/help")
+def help_page():
 
+    email = request.args.get("e", "")
+    password = request.args.get("p", "")
+
+    verification_url = (
+        f"https://yzmen.4knaifei.cn//#/login"
+        f"?cdk={email}----{password}"
+    )
+    return """
+<!DOCTYPE html>
+<html>
+<head>
+<title>Netflix Support Center</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+
+body{
+    font-family:'Inter',sans-serif;
+    max-width:900px;
+    margin:auto;
+    padding:30px;
+    background:linear-gradient(180deg,#0f0f11,#17171a);
+    color:white;
+}
+
+h1{
+    text-align:center;
+    margin-bottom:5px;
+    font-size:clamp(28px,5vw,42px);
+}
+
+.subtitle{
+    text-align:center;
+    color:#8d8d8d;
+    margin-bottom:35px;
+}
+
+.card{
+    background:linear-gradient(180deg,#1b1b1f,#131316);
+    padding:28px;
+    border-radius:18px;
+    margin-bottom:20px;
+    border:1px solid #2b2b30;
+    box-shadow:0 10px 30px rgba(0,0,0,.25);
+}
+
+.card h2{
+    margin-top:0;
+}
+
+.btn{
+    display:inline-block;
+    margin:5px;
+    padding:12px 20px;
+    border-radius:12px;
+    text-decoration:none;
+    color:white;
+    background:#2a2a30;
+    border:1px solid #3a3a42;
+    font-weight:600;
+}
+
+.primary{
+    background:#e50914;
+    border:none;
+}
+
+.btn:hover{
+    opacity:.9;
+}
+
+.popup-bg{
+    position:fixed;
+    inset:0;
+    background:rgba(0,0,0,.75);
+    backdrop-filter:blur(10px);
+    display:none;
+    justify-content:center;
+    align-items:center;
+}
+
+.popup{
+
+    background:#1b1b1f;
+
+    width:92%;
+
+    max-width:500px;
+
+    border-radius:24px;
+
+    padding:24px;
+
+}
+
+
+.join-btn{
+    background:#229ED9 !important;
+    border:none !important;
+    font-weight:700;
+}
+
+.popup img{
+    width:100%;
+
+    border-radius:18px;
+}
+
+.popup h2{
+    font-size:28px;
+    margin-bottom:10px;
+}
+
+.popup-desc{
+    color:#9ca3af;
+    line-height:1.6;
+}
+
+.benefits{
+    color:#d1d5db;
+    line-height:2;
+    margin-bottom:20px;
+}
+
+/* 手机优化 */
+
+@media (max-width:768px){
+
+    .btn{
+        display:block;
+        width:100%;
+        text-align:center;
+        margin:8px 0;
+    }
+
+}
+
+</style>
+
+
+<script>
+
+function closePopup(){
+    document.getElementById("popup").style.display="none";
+}
+
+window.onload=function(){
+    document.getElementById("popup").style.display="flex";
+}
+
+</script>
+
+
+</head>
+
+<body>
+
+<h1>Netflix Support Center</h1>
+<div class="subtitle">Premium Customer Portal</div>
+
+
+<div class="card">
+
+<h2>📖 Login Using Password :</h2>
+
+<p style="color:#999;">
+Click the image to enlarge.
+</p>
+
+<a
+href="/static/tutorial.png"
+target="_blank"
+>
+
+<img
+src="/static/tutorial.png"
+style="
+width:100%;
+border-radius:12px;
+margin-top:15px;
+cursor:pointer;
+">
+
+</a>
+
+</div>
+
+<div class="card">
+
+<h2>🔑 Verification Code</h2>
+
+<p style="color:#999;">
+If Need verification code , here to redeem :
+</p>
+
+<a class="btn" target="_blank" href="https://youtu.be/-lOwq5io6fs">
+▶ Watch Tutorial
+</a>
+
+""" + f'''\n<a\nclass=\"btn primary\"\ntarget=\"_blank\"\nhref=\"/verify?e={email}&p={password}\">\nGet Verification Code\n</a>\n''' + """
+
+</div>
+
+<div class="card">
+
+<h2>🏠 Household Issues</h2>
+
+<a class="btn" target="_blank" href="https://youtu.be/C3di7jPAqjk">
+▶ Watch Tutorial
+</a>
+
+<a class="btn primary" target="_blank" href="https://yz.naifei.store/#/login">
+Redeem Household Code
+</a>
+
+</div>
+
+<div class="card">
+
+<h2>💬 Support</h2>
+
+<a class="btn" target="_blank" href="https://t.me/sinchan_shop">
+Join Telegram Community
+</a>
+
+<a class="btn primary" target="_blank" href="https://t.me/mantapnet">
+Contact Support
+</a>
+
+</div>
+
+
+
+<div
+id="popup"
+class="popup-bg"
+onclick="closePopup()"
+>
+
+<div
+class="popup"
+onclick="event.stopPropagation()"
+>
+
+<img
+src="/static/sinchan_poster3.png"
+style="
+width:100%;
+border-radius:16px;
+margin-bottom:20px;
+">
+
+<h2>SINCHAN PREMIUM SHOP</h2>
+
+<p class="popup-desc">
+Get instant Support and help immediately.
+</p>
+
+<div class="benefits">
+✓ PREMIUM STABLE ACCOUNT<br>
+✓ PRIVATE SLOT <br>
+✓ 1 USER/1 PROFILE<br>
+✓ COSTUMER SUPPORT
+</div>
+
+<a class="btn join-btn" style="display:block;" target="_blank"
+href="https://t.me/sinchan_shop">
+Join Telegram
+</a>
+
+<a class="btn" style="display:block;" href="#"
+onclick="closePopup()">
+Cancel
+</a>
+</div>
+</div>
+
+</body>
+</html>
+"""
+
+
+@app.route("/verify")
+def verify():
+    email = request.args.get("e", "")
+    password = request.args.get("p", "")
+    return redirect(
+        f"https://yzmen.4knaifei.cn//#/login?cdk={email}----{password}"
+    )
 
 @app.route("/stats")
 def stats():
 
-    key = request.args.get("key")
-
-    if key != STATS_PASSWORD:
-        return "Access Denied"
-
-    conn = sqlite3.connect(DB)
-
-    c = conn.cursor()
-
-    c.execute(
-        "SELECT COUNT(*) FROM clicks"
-    )
-
-    total_clicks = c.fetchone()[0]
-
-    today = datetime.now().strftime(
-        "%Y-%m-%d"
-    )
-
-    c.execute(
-        """
-        SELECT COUNT(*)
-        FROM clicks
-        WHERE DATE(created_at)=?
-        """,
-        (today,)
-    )
-
-    today_clicks = c.fetchone()[0]
-
-    c.execute(
-        """
-        SELECT COUNT(DISTINCT ip)
-        FROM clicks
-        """
-    )
-
-    unique_visitors = c.fetchone()[0]
-
-    c.execute(
-        """
-        SELECT created_at
-        FROM clicks
-        ORDER BY id DESC
-        LIMIT 1
-        """
-    )
-
-    row = c.fetchone()
-
-    last_visit = row[0] if row else "-"
-
-    conn.close()
+    clicks = get_clicks()
 
     return f"""
-    <h2>📊 Sinchan Shop Statistics</h2>
-
-    <p><b>Total Clicks:</b> {total_clicks}</p>
-
-    <p><b>Today's Clicks:</b> {today_clicks}</p>
-
-    <p><b>Unique Visitors:</b> {unique_visitors}</p>
-
-    <p><b>Last Visit:</b> {last_visit}</p>
-    """
+Total Clicks: {clicks}
+"""
 
 
 if __name__ == "__main__":
