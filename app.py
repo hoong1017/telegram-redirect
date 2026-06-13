@@ -5,7 +5,6 @@ from datetime import datetime
 app = Flask(__name__)
 
 DB = "stats.db"
-
 STATS_PASSWORD = "sinchan123"
 
 
@@ -25,6 +24,10 @@ def init_db():
 
     conn.commit()
     conn.close()
+
+
+# Render / Gunicorn 启动时立即创建表
+init_db()
 
 
 def add_click(ip):
@@ -91,7 +94,6 @@ def stats():
     key = request.args.get("key")
 
     if key != STATS_PASSWORD:
-
         return "Access Denied"
 
     conn = sqlite3.connect(DB)
@@ -139,11 +141,7 @@ def stats():
 
     row = c.fetchone()
 
-    last_visit = (
-        row[0]
-        if row
-        else "-"
-    )
+    last_visit = row[0] if row else "-"
 
     conn.close()
 
@@ -161,5 +159,4 @@ def stats():
 
 
 if __name__ == "__main__":
-    init_db()
     app.run()
