@@ -287,6 +287,43 @@ Redeem Household Code
 
 <div class="card">
 
+<h2>📊 Shared vs Private Profile</h2>
+
+<img
+src="/static/profile_compare.png"
+style="
+width:100%;
+border-radius:12px;
+display:block;
+margin:auto;
+">
+
+<p style="
+text-align:center;
+margin-top:15px;
+color:#999;
+">
+Private Profile gives you your own history,
+profile lock and no screen limit issues.
+</p>
+
+<a
+class="btn primary"
+target="_blank"
+href="https://t.me/sinchan_shop"
+style="
+display:block;
+text-align:center;
+margin-top:15px;
+"
+>
+Get Private Profile
+</a>
+
+</div>
+
+<div class="card">
+
 <h2>💬 Support</h2>
 
 <a class="btn" target="_blank" href="https://t.me/sinchan_shop">
@@ -323,19 +360,19 @@ margin-bottom:20px;
 <h2>SINCHAN PREMIUM SHOP</h2>
 
 <p class="popup-desc">
-Get instant Support and help immediately.
+NETFLIX PREMIUM 4K Ultra HD Quality.
 </p>
 
 <div class="benefits">
 ✓ PREMIUM STABLE ACCOUNT<br>
 ✓ PRIVATE SLOT <br>
 ✓ 1 USER/1 PROFILE<br>
-✓ COSTUMER SUPPORT
+✓ NO SCREEN LIMIT 
 </div>
 
 <a class="btn join-btn" style="display:block;" target="_blank"
 href="https://t.me/sinchan_shop">
-Join Telegram
+Buy Now
 </a>
 
 <a class="btn" style="display:block;" href="#"
