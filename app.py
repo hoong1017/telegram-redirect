@@ -372,7 +372,7 @@ NETFLIX PREMIUM 4K Ultra HD Quality.
 
 <a class="btn join-btn" style="display:block;" target="_blank"
 href="https://t.me/sinchan_shop">
-Buy Now
+Join Telegram
 </a>
 
 <a class="btn" style="display:block;" href="#"
