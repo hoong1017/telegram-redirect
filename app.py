@@ -204,6 +204,47 @@ font-size:12px;
 
 }
 
+.tabs{
+    display:flex;
+    gap:10px;
+    justify-content:center;
+    margin-bottom:25px;
+}
+
+.tab{
+    flex:1;
+    text-align:center;
+    padding:12px;
+    border-radius:12px;
+    background:#1b1b1f;
+    border:1px solid #2b2b30;
+    color:white;
+    cursor:pointer;
+    font-weight:600;
+}
+
+.tab.active{
+    background:#e50914;
+    border:none;
+}
+
+.telegram-qr{
+    width:220px;
+    max-width:70%;
+    display:block;
+    margin:20px auto;
+    border-radius:16px;
+}
+
+.linkbox{
+    margin-top:10px;
+    padding:12px;
+    background:#111827;
+    border-radius:10px;
+    text-align:center;
+    word-break:break-all;
+}
+
 </style>
 
 
@@ -217,6 +258,36 @@ window.onload=function(){
     document.getElementById("popup").style.display="flex";
 }
 
+function showTab(tab){
+
+    document.getElementById("login-content").style.display="none";
+    document.getElementById("telegram-content").style.display="none";
+
+    document.getElementById("login-tab").classList.remove("active");
+    document.getElementById("telegram-tab").classList.remove("active");
+
+    if(tab==="login"){
+
+        document.getElementById("login-content").style.display="block";
+        document.getElementById("login-tab").classList.add("active");
+
+    }else{
+
+        document.getElementById("telegram-content").style.display="block";
+        document.getElementById("telegram-tab").classList.add("active");
+
+    }
+}
+
+function copyTelegram(){
+
+    navigator.clipboard.writeText(
+        "https://t.me/sinchan_shop"
+    );
+
+    alert("Telegram link copied!");
+}
+
 </script>
 
 
@@ -227,14 +298,31 @@ window.onload=function(){
 <h1>Netflix Support Center</h1>
 <div class="subtitle">Shop Sinchan Customer Portal</div>
 
+<div class="tabs">
+
+    <div
+    id="login-tab"
+    class="tab active"
+    onclick="showTab('login')">
+        LOGIN METHOD
+    </div>
+
+    <div
+    id="telegram-tab"
+    class="tab"
+    onclick="showTab('telegram')">
+        TELEGRAM
+    </div>
+
+</div>
+
+<div id="login-content">
 
 <div class="card">
 
 <h2>📖 Login Using Password :</h2>
 
-<p style="color:#999;">
-Click the image to enlarge.
-</p>
+<p>Click the image to enlarge.</p>
 
 <a
 href="/static/tutorial.png"
@@ -254,6 +342,7 @@ cursor:pointer;
 </a>
 
 </div>
+
 
 <div class="card">
 
@@ -285,6 +374,89 @@ Redeem Household Code
 
 </div>
 
+
+
+<div class="card">
+
+<h2>💬 Support</h2>
+
+<a class="btn" target="_blank"
+href="https://t.me/sinchan_shop">
+Join Telegram Community
+</a>
+
+<a class="btn primary" target="_blank" href="https://t.me/mantapnet">
+Contact Support
+</a>
+
+</div>
+
+</div>
+
+<div
+id="telegram-content"
+style="display:none;">
+
+<div class="card">
+
+<h2>📱 Join Telegram</h2>
+<p style="
+text-align:center;
+color:#22c55e;
+font-size:13px;
+font-weight:600;
+margin-top:15px;
+line-height:1.6;
+">
+
+🔥 Untuk dapatkan Private Profile
+(No Screen Limit),
+sila join Telegram.
+
+</p>
+<button
+class="btn join-btn"
+onclick="copyTelegram()">
+📋 Copy Telegram Link
+</button>
+
+<div class="linkbox">
+https://t.me/sinchan_shop
+</div>
+<img
+src="/static/telegram_qr.png"
+class="telegram-qr">
+
+<p style="
+text-align:center;
+color:#fbbf24;
+font-size:13px;
+margin-top:15px;
+margin-bottom:15px;
+">
+
+⚠️ Tak dapat buka Telegram?
+Sila guna browser lain.
+
+</p>
+
+<div style="text-align:center;">
+
+<a
+class="btn join-btn"
+target="_blank"
+href="https://t.me/sinchan_shop"
+style="
+display:inline-block;
+min-width:180px;
+">
+🚀 Join Telegram
+</a>
+
+</div>
+
+</div>
+
 <div class="card">
 
 <h2>📊 Shared vs Private Profile</h2>
@@ -294,9 +466,8 @@ src="/static/profile_compare.png"
 style="
 width:100%;
 border-radius:12px;
-display:block;
-margin:auto;
 ">
+
 
 <p style="
 text-align:center;
@@ -321,22 +492,8 @@ Get Private Profile
 </a>
 
 </div>
-
-<div class="card">
-
-<h2>💬 Support</h2>
-
-<a class="btn" target="_blank" href="https://t.me/sinchan_shop">
-Join Telegram Community
-</a>
-
-<a class="btn primary" target="_blank" href="https://t.me/mantapnet">
-Contact Support
-</a>
-
 </div>
-
-
+</div>
 
 <div
 id="popup"
@@ -370,8 +527,15 @@ NETFLIX PREMIUM 4K Ultra HD Quality.
 ✓ NO SCREEN LIMIT 
 </div>
 
-<a class="btn join-btn" style="display:block;" target="_blank"
-href="https://t.me/sinchan_shop">
+<a
+class="btn join-btn"
+style="display:block;"
+href="#"
+onclick="
+closePopup();
+showTab('telegram');
+return false;
+">
 Join Telegram
 </a>
 
@@ -379,13 +543,14 @@ Join Telegram
 onclick="closePopup()">
 Cancel
 </a>
+
 </div>
 </div>
 
 </body>
 </html>
-"""
 
+"""
 
 @app.route("/verify")
 def verify():
